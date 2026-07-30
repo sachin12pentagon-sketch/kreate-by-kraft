@@ -96,30 +96,54 @@
         }
     </script>
 <style>
-        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
-        .reveal.active { opacity: 1; transform: translateY(0); }
-        .parallax-image { transition: transform 0.5s cubic-bezier(0.33, 1, 0.68, 1); }
-        .nav-blur { backdrop-filter: blur(12px); background-color: rgba(252, 249, 248, 0.8); }
-        @keyframes pulse-custom { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
-        .animate-pulse-slow { animation: pulse-custom 3s infinite ease-in-out; }
-        
-        .branch-card.active-branch { 
-            border-color: #3e5338; 
-            background-color: #f0eded; 
-            box-shadow: 0 10px 30px -10px rgba(62, 83, 56, 0.15);
-        }
-        .branch-card { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); cursor: pointer; border: 1px solid #e4e2e1; }
-        .branch-card:hover:not(.active-branch) { border-color: #747870; transform: translateY(-4px); }
-        .glass-btn-primary { background-color: #3e5338; color: white; }
-        .glass-btn-primary:hover { background-color: #556b4e; }
-        .glass-btn-secondary { background-color: rgba(255, 255, 255, 0.6); backdrop-filter: blur(8px); border: 1px solid #c4c8be; }
-        .glass-btn-secondary:hover { background-color: white; border-color: #747870; }
-        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
-        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
-        .custom-scrollbar::-webkit-scrollbar-thumb { background: #c4c8be; border-radius: 10px; }
+       /* ===========================
+   Mobile Branch Navigation
+=========================== */
 
-        .menu-showcase-card { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
-        .menu-showcase-card:hover { transform: translateY(-4px); border-color: #d1eac6; background: rgba(209, 234, 198, 0.05); }
+.branch-nav-mobile{
+    display:none;
+}
+
+@media (max-width:768px){
+
+    .branch-nav-mobile{
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        gap:12px;
+        margin:20px 0 24px;
+        flex-wrap:wrap;
+    }
+
+    .branch-nav-btn{
+        padding:10px 18px;
+        border:1.5px solid #556b2f;
+        border-radius:999px;
+        background:#fff;
+        color:#556b2f;
+        font-size:13px;
+        font-weight:600;
+        cursor:pointer;
+        transition:.3s ease;
+        white-space:nowrap;
+    }
+
+    .branch-nav-btn:hover,
+    .branch-nav-btn.active{
+        background:#556b2f;
+        color:#fff;
+        transform:translateY(-2px);
+        box-shadow:0 8px 20px rgba(85,107,47,.25);
+    }
+
+    .branch-card{
+        scroll-margin-top:120px;
+    }
+
+    html{
+        scroll-behavior:smooth;
+    }
+}
     </style>
 </head>
 <body class="bg-background text-on-surface font-body-md overflow-x-hidden selection:bg-primary-fixed selection:text-on-primary-fixed">
@@ -230,9 +254,26 @@
 <h2 class="font-headline-lg text-headline-lg">Three Destinations, One Kraft</h2>
 <p class="max-w-xl mx-auto text-on-surface-variant mt-4">Each Kreate by Kraft address has its own soul across Chennai. Tap a card to open its dedicated landing page.</p>
 </div>
+        <!-- Mobile Branch Navigation -->
+<div class="mobile-branch-nav">
+    <button class="branch-btn active"
+        onclick="document.getElementById('ecr').scrollIntoView({behavior:'smooth'})">
+        ECR
+    </button>
+
+    <button class="branch-btn"
+        onclick="document.getElementById('nandhanam').scrollIntoView({behavior:'smooth'})">
+        NANDHANAM
+    </button>
+
+    <button class="branch-btn"
+        onclick="document.getElementById('knk').scrollIntoView({behavior:'smooth'})">
+        KNK
+    </button>
+</div>
 <div class="grid md:grid-cols-3 gap-8">
 <!-- ECR Card -->
-<div class="group relative bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 reveal active" style="transition-delay: 0ms;">
+<div id="ecr" class="group relative bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 reveal active" style="transition-delay: 0ms;">
 <div class="aspect-[3/4] overflow-hidden">
 <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBAS1j6S4wSeu0s2qdpTNd_V-OjLHDxxeIMylAA9timOvIgNdKduifApJUFb6Oxv1Xx-KicZ1L7f_2I4NO71XtkmnDU2Sla5PwQdldjSs_azV-e131oJKwTmxp00IsHEM4l7MVbsHF2MQE8qtPfJoOV2xhXegOisVjjQ-slwXBWHSyQWEIhScdNpn44-kFU-Aeohlgo-HgtRezf8JDXFjKcTlkZhBMHGU0mUuh-vhFfWcoLgodVqdA">
 </div>
@@ -250,7 +291,7 @@
 </div>
 </div>
 <!-- Nandanam Card -->
-<div class="group relative bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 reveal active" style="transition-delay: 200ms;">
+<div id="nandhanam" class="group relative bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 reveal active" style="transition-delay: 200ms;">
 <div class="aspect-[3/4] overflow-hidden">
 <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBOEv50oGIPOnqFgr5TJHvWVUOR6w2u_JsgscIsgNMbBvAPm7PzMRwGitCG_k_SLUDskTfTRLxzyxL3cxeEErO3iow1oMqDaYGlPDY5jGyyUOle2J29sTPiYV-Vtb_gI-ynq82VTv8p58fxyLHaypK1ya9uLljV-WY_6h4UJcan-fyGZROzCRtN-mX5Ru_ea6xqdMClsGx_51oFSeG_pTFwh99mqqm6qCi_lbGWYqeisPNkAXoJ4cw">
 </div>
@@ -268,7 +309,7 @@
 </div>
 </div>
 <!-- KNK Card -->
-<div class="group relative bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 reveal active" style="transition-delay: 400ms;">
+<div id="knk" class="group relative bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 reveal active" style="transition-delay: 400ms;">
 <div class="aspect-[3/4] overflow-hidden">
 <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC0Z9POSZIUc7VuqrdMHEJe5WdgaULAUudcgz5b1bO2dlSU25IMnYHGrzDF2HzeGUWTL-ydNOV6sLbQ-2D4_qLKGVkttucYBZYqhL4LFyxPwS0e8PtStMXlBMQbPfntmVUzN0h2ygZLRXL0Es29Ei6CgIsT17TBIcw-MwhvjpOaJcR6sSA8Mw2XxhGYxuyAXiyhQsSukGW-LuYmi8fT8xf42WXVPsPKArUOP7WI0D8r9kGgOOAbfiE">
 </div>
